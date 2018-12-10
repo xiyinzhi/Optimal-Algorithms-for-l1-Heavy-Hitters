@@ -1,0 +1,8 @@
+i,2
+spark,3
+love,1
+is,1
+learning,1
+now,1
+cool,1
+am,1
