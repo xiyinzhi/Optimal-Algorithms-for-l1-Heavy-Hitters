@@ -4,6 +4,7 @@ import java.util.Map;
  * Created by xyz on 2018/12/10.
  */
 public class Main {
+    private static final int size = 321320640;
 
     public static void main(String[] args) {
         int index = System.getProperty("user.dir").lastIndexOf("/");
@@ -16,13 +17,14 @@ public class Main {
         FileProcessing fileProcessing = new FileProcessing();
         Map<String, Integer> true_words = fileProcessing.readCountFile(path + "/wiki_sorted_word_count.txt", k);
         Map<String, Integer> test_words = fileProcessing.readCountFile(path + "/wiki_MG_output.txt", k);
-        int size = fileProcessing.readFileSize(filePath + "/wiki_streaming.txt");
-        Main main = new Main();
+//        int size = fileProcessing.readFileSize(filePath + "/wiki_streaming.txt");
+//        System.out.println(size);
 
-        System.out.println("Result:" + main.evaluate(true_words, test_words, k, size));
+        Main main = new Main();
+        main.evaluateMG(true_words, test_words, k);
     }
 
-    public double evaluate(Map<String, Integer> true_words, Map<String, Integer> test_words, int k, int size) {
+    public void evaluateMG(Map<String, Integer> true_words, Map<String, Integer> test_words, int k) {
         int count = 0;
         int t = 0;
         for (String key : true_words.keySet()) {
@@ -33,6 +35,7 @@ public class Main {
                 }
             }
         }
-        return (double) count / (double) t;
+        System.out.println("Result:" + (double) count / (double) t);
+        return;
     }
 }
