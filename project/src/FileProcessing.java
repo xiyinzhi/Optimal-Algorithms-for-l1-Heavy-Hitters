@@ -34,7 +34,7 @@ public class FileProcessing {
     }
 
     public void saveResult(Map<String, Integer> map, String fileName) throws IOException {
-        File file = new File(fileName + ".txt");
+        File file = new File("../" + fileName + ".txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
 //        out.write("食屎啦你");
         for (String key : map.keySet()) {
