@@ -1,22 +1,21 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by xyz on 2018/12/10.
  */
 public class FileProcessing {
 
-    public List<String> readFile(String fileName) {
+    public Set<String> readFile(String fileName, int k) {
         File file = new File(fileName);
         BufferedReader reader = null;
-        List<String> list = new ArrayList<>();
+        Set<String> set = new HashSet<>();
         try {
             reader = new BufferedReader(new FileReader(file));
             String tempString;
-            while ((tempString = reader.readLine()) != null) {
-                list.add(tempString.toLowerCase());
+            while ((tempString = reader.readLine()) != null && k > 0) {
+                set.add(tempString.split(" ")[0]);
+                k--;
             }
             reader.close();
         } catch (IOException e) {
@@ -30,7 +29,7 @@ public class FileProcessing {
                 }
             }
         }
-        return list;
+        return set;
     }
 
     public void saveResult(Map<String, Integer> map, String fileName) throws IOException {
