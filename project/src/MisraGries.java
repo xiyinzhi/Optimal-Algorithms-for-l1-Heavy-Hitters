@@ -21,7 +21,7 @@ public class MisraGries {
         int k = input.nextInt();
         Map<String, Integer> map = run.misraGries(k, filePath + "/wiki_streaming.txt");
 
-        fileProcessing.saveResult(map, "wiki_output");
+        fileProcessing.saveResult(map, "wiki_MG_output");
 //        System.out.println("Hello World!");
     }
 
