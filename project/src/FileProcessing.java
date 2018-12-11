@@ -38,7 +38,7 @@ public class FileProcessing {
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
 //        out.write("食屎啦你");
         for (String key : map.keySet()) {
-            out.write(key + "," + map.get(key) + "\r\n");
+            out.write(key + " " + map.get(key) + "\r\n");
         }
         out.close();
     }
