@@ -8,10 +8,13 @@ public class MisraGries {
 
     public static void main(String[] args) throws IOException {
         int index = System.getProperty("user.dir").lastIndexOf("/");
+//        String path = System.getProperty("user.dir").substring(0, index);
+//
+//        index = path.lastIndexOf("/");
         String filePath = System.getProperty("user.dir").substring(0, index);
 
         FileProcessing fileProcessing = new FileProcessing();
-        List<String> words = fileProcessing.readFile(filePath + "/test_article.txt");
+        List<String> words = fileProcessing.readFile(filePath + "/test_input.txt");
 
         MisraGries run = new MisraGries();
         Scanner input = new Scanner(System.in);
