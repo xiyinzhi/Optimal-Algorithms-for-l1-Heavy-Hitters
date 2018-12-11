@@ -16,7 +16,7 @@ public class FileProcessing {
             reader = new BufferedReader(new FileReader(file));
             String tempString;
             while ((tempString = reader.readLine()) != null) {
-                list.add(tempString);
+                list.add(tempString.toLowerCase());
             }
             reader.close();
         } catch (IOException e) {
