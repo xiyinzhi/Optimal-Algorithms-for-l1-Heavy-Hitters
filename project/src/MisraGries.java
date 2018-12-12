@@ -35,6 +35,7 @@ public class MisraGries {
             while ((tempString = reader.readLine()) != null) {
 //                list.add(tempString.toLowerCase());
                 String key = tempString.toLowerCase();
+//                System.out.println(key.hashCode());
                 if (map.containsKey(key)) {
                     int v = map.get(key);
                     map.put(key, v + 1);
