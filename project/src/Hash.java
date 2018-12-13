@@ -7,4 +7,8 @@ public class Hash {
         int h = str.hashCode();
         return (h & 0x7FFFFFFF);
     }
+
+    public int hashFunction(int hashCode) {
+        return hashCode;
+    }
 }
