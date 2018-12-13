@@ -58,11 +58,20 @@ public class FileProcessing {
         return size;
     }
 
-    public void saveResult(Map<String, Integer> map, String fileName) throws IOException {
+    public void saveMGResult(Map<String, Integer> map, String fileName) throws IOException {
         File file = new File("../" + fileName + ".txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
         for (String key : map.keySet()) {
             out.write(key + " " + map.get(key) + "\r\n");
+        }
+        out.close();
+    }
+
+    public void saveNearOptimalResult(Map<Integer, Integer> t1, List<String> t2, String fileName) throws IOException {
+        File file = new File("../" + fileName + ".txt");
+        BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        for (String key : t2) {
+            out.write(key + " " + t1.get(key.hashCode()) + "\r\n");
         }
         out.close();
     }
