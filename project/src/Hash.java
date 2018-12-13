@@ -8,7 +8,4 @@ public class Hash {
         return (h & 0x7FFFFFFF);
     }
 
-    public int hashFunction(int hashCode) {
-        return hashCode;
-    }
 }

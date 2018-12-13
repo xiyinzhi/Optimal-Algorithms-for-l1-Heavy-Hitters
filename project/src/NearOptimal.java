@@ -35,10 +35,13 @@ public class NearOptimal {
         Map<Integer, Integer> t1 = new TreeMap<>();
         List<String> t2 = new ArrayList<>();
 
+
         NearOptimal main = new NearOptimal();
         main.insert(t1, t2, filePath + "/wiki_streaming.txt");
         main.report(t1, t2, "near_optimal_output.txt");
     }
+
+    HashFunction hashFunction = new HashFunction(hashRange);
 
 
     public void insert(Map<Integer, Integer> t1, List<String> t2, String fileName) {
@@ -54,7 +57,7 @@ public class NearOptimal {
                     // perform Misra-Gries
                     String x = tempString.toLowerCase();
                     Hash hash = new Hash();
-                    int key = hash.hashFunction(hash.hashCode(x));
+                    int key = hashFunction.getHashResult(hash.hashCode(x));
                     if (t1.containsKey(key)) {
                         int v = t1.get(key);
                         t1.put(key, v + 1);
@@ -85,7 +88,7 @@ public class NearOptimal {
                                 if (!t2.contains(x)) {
                                     if (t2.size() == threshold) {
                                         String y = t2.get(t2.size() - 1);
-                                        if (t1.get(hash.hashFunction(hash.hashCode(y))) < t1.get(key)) {
+                                        if (t1.get(hashFunction.getHashResult(hash.hashCode(y))) < t1.get(key)) {
                                             t2.remove(y);
                                             t2.add(x);
                                         }
