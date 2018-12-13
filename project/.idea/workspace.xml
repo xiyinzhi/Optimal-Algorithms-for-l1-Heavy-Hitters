@@ -26,12 +26,12 @@
       <file leaf-file-name="NearOptimal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/NearOptimal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="77" column="18" lean-forward="false" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+            <state relative-caret-position="399">
+              <caret line="97" column="21" lean-forward="true" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4674#4691#0" expanded="true" />
-                <element signature="e#5047#5053#0" expanded="true" />
+                <element signature="e#4908#4925#0" expanded="true" />
+                <element signature="e#5281#5287#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -682,12 +682,12 @@
       <updated>1544478428501</updated>
       <workItem from="1544478438113" duration="12238000" />
       <workItem from="1544561327450" duration="1259000" />
-      <workItem from="1544636632511" duration="9352000" />
+      <workItem from="1544636632511" duration="10414000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22849000" />
+    <option name="totallyTimeSpent" value="23911000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -755,8 +755,8 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="3" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4674#4691#0" expanded="true" />
-            <element signature="e#5047#5053#0" expanded="true" />
+            <element signature="e#4908#4925#0" expanded="true" />
+            <element signature="e#5281#5287#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -855,12 +855,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/NearOptimal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="77" column="18" lean-forward="false" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+        <state relative-caret-position="399">
+          <caret line="97" column="21" lean-forward="true" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4674#4691#0" expanded="true" />
-            <element signature="e#5047#5053#0" expanded="true" />
+            <element signature="e#4908#4925#0" expanded="true" />
+            <element signature="e#5281#5287#0" expanded="true" />
           </folding>
         </state>
       </provider>

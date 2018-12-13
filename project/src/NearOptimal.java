@@ -19,7 +19,7 @@ public class NearOptimal {
     private static final double k = 1 / epsilon;
     private static final double threshold = 1 / phi;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int index = System.getProperty("user.dir").lastIndexOf("/");
         String path = System.getProperty("user.dir").substring(0, index);
 
@@ -37,7 +37,7 @@ public class NearOptimal {
 
         NearOptimal main = new NearOptimal();
         main.insert(t1, t2, filePath + "/wiki_streaming.txt");
-        main.report(t1, t2);
+        main.report(t1, t2, "near_optimal_output.txt");
     }
 
 
@@ -73,38 +73,46 @@ public class NearOptimal {
                             }
                         }
                     }
+
                     // sort T1 by value, desc
                     t1 = sortByValueDescending(t1);
+
+                    // maintain T2
                     int i = 1;
                     for (Map.Entry<Integer, Integer> entry : t1.entrySet()) {
                         if (i <= threshold) {
                             if (entry.getValue() <= t1.get(key)) {
                                 if (!t2.contains(x)) {
                                     if (t2.size() == threshold) {
-                                        for
-                                    } else {
-                                        t2.add(x);
+                                        String y = t2.get(t2.size() - 1);
+                                        if (t1.get(hash.hashFunction(hash.hashCode(y))) < t1.get(key)) {
+                                            t2.remove(y);
+                                            t2.add(x);
+                                        }
                                     }
+                                } else {
+                                    t2.add(x);
                                 }
                             }
                         } else {
                             break;
                         }
                         i++;
-                        System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
                     }
-
-                    // maintain T2
-                    if ()
-
+//                    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
                 } else {
                     continue;
                 }
             }
             reader.close();
-        } catch (IOException e) {
+        } catch (
+                IOException e)
+
+        {
             e.printStackTrace();
-        } finally {
+        } finally
+
+        {
             if (reader != null) {
                 try {
                     reader.close();
@@ -113,10 +121,13 @@ public class NearOptimal {
                 }
             }
         }
+
     }
 
-    public void report(Map<Integer, Integer> t1, List<String> t2) {
 
+    public void report(Map<Integer, Integer> t1, List<String> t2, String fileName) throws IOException {
+        FileProcessing fileProcessing = new FileProcessing();
+        fileProcessing.saveNearOptimalResult(t1, t2, fileName);
     }
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDescending(Map<K, V> map) {
