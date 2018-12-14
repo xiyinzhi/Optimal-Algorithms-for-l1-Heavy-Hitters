@@ -1,23 +1,23 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-    private static final int m = 321320640;
+    //    private static final int m = 321320640;
+    private static final int m = 1000;
 
     private static final double epsilon = 0.001;
     private static final double delta = 0.1;
     private static final double phi = 0.01;
-    private static final int l = (int) (6 * Math.log(6 / delta) / Math.pow(epsilon, 2));
-    private static final int hashRange = roundUp(4 * Math.pow(l, 2) / delta);
+    private static final int l = Math.min((int) (6 * Math.log(6 / delta) / Math.pow(epsilon, 2)), m);
+    private static final int hashRange = l > 46340 ? Integer.MAX_VALUE : roundUp(4 * Math.pow(l, 2) / delta);
     private static final double p = (double) (6 * l) / (double) m;
     private static final double k = 1 / epsilon;
     private static final double threshold = 1 / phi;
+
+    private HashFunction hashFunction;
 
     public static void main(String[] args) throws IOException {
         int index = System.getProperty("user.dir").lastIndexOf("/");
@@ -26,22 +26,19 @@ public class NearOptimal {
         index = path.lastIndexOf("/");
         String filePath = System.getProperty("user.dir").substring(0, index);
 
-//        System.out.println("Hello World!");
-//        int a = 837983602;
-//        int b = -98299;
-//        System.out.println(a + " " + (a & 0x7FFFFFFF));
-//        System.out.println(b + " " + (b & 0x7FFFFFFF));
-
         Map<Integer, Integer> t1 = new TreeMap<>();
         List<String> t2 = new ArrayList<>();
 
 
         NearOptimal main = new NearOptimal();
-        main.insert(t1, t2, filePath + "/wiki_streaming.txt");
-        main.report(t1, t2, "near_optimal_output.txt");
+        main.insert(t1, t2, filePath + "/test_article.txt");
+        main.report(t1, t2, "near_optimal_output");
     }
 
-    HashFunction hashFunction = new HashFunction(hashRange);
+
+    public NearOptimal() {
+        hashFunction = new HashFunction(hashRange);
+    }
 
 
     public void insert(Map<Integer, Integer> t1, List<String> t2, String fileName) {
@@ -84,7 +81,8 @@ public class NearOptimal {
                     int i = 1;
                     for (Map.Entry<Integer, Integer> entry : t1.entrySet()) {
                         if (i <= threshold) {
-                            if (entry.getValue() <= t1.get(key)) {
+//                            System.out.println(entry);
+                            if (t1.containsKey(key) && entry.getValue() <= t1.get(key)) {
                                 if (!t2.contains(x)) {
                                     if (t2.size() == threshold) {
                                         String y = t2.get(t2.size() - 1);
@@ -92,9 +90,9 @@ public class NearOptimal {
                                             t2.remove(y);
                                             t2.add(x);
                                         }
+                                    } else {
+                                        t2.add(x);
                                     }
-                                } else {
-                                    t2.add(x);
                                 }
                             }
                         } else {
@@ -129,8 +127,16 @@ public class NearOptimal {
 
 
     public void report(Map<Integer, Integer> t1, List<String> t2, String fileName) throws IOException {
-        FileProcessing fileProcessing = new FileProcessing();
-        fileProcessing.saveNearOptimalResult(t1, t2, fileName);
+        File file = new File("../" + fileName + ".txt");
+        BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        Hash hash = new Hash();
+        int n = Math.min(t2.size(), t1.size());
+        for (int i = 0; i < n; i++) {
+            String key = t2.get(i);
+            out.write(key + " " + t1.get(hashFunction.getHashResult(hash.hashCode(key))) + "\r\n");
+        }
+        out.close();
+
     }
 
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDescending(Map<K, V> map) {
