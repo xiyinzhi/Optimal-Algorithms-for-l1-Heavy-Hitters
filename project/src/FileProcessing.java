@@ -67,13 +67,5 @@ public class FileProcessing {
         out.close();
     }
 
-    public void saveNearOptimalResult(Map<Integer, Integer> t1, List<String> t2, String fileName) throws IOException {
-        File file = new File("../" + fileName + ".txt");
-        BufferedWriter out = new BufferedWriter(new FileWriter(file));
-        Hash hash = new Hash();
-        for (String key : t2) {
-            out.write(key + " " + t1.get(hash.hashFunction(hash.hashCode(key))) + "\r\n");
-        }
-        out.close();
-    }
+
 }
