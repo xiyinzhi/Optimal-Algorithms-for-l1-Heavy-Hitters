@@ -72,7 +72,7 @@ public class FileProcessing {
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
         Hash hash = new Hash();
         for (String key : t2) {
-            out.write(key + " " + t1.get(hash.hashCode(key)) + "\r\n");
+            out.write(key + " " + t1.get(hash.hashFunction(hash.hashCode(key))) + "\r\n");
         }
         out.close();
     }
