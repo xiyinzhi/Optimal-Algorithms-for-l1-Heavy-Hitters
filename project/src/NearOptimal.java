@@ -5,8 +5,8 @@ import java.util.*;
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-    //    private static final int m = 321320640;
-    private static final int m = 1000;
+    private static final int m = 321320640;
+//    private static final int m = 1000;
 
     private static final double epsilon = 0.001;
     private static final double delta = 0.1;
@@ -18,6 +18,8 @@ public class NearOptimal {
     private static final double threshold = 1 / phi;
 
     private HashFunction hashFunction;
+    private static Map<Integer, Integer> t1;
+    private static List<String> t2;
 
     public static void main(String[] args) throws IOException {
         int index = System.getProperty("user.dir").lastIndexOf("/");
@@ -26,28 +28,37 @@ public class NearOptimal {
         index = path.lastIndexOf("/");
         String filePath = System.getProperty("user.dir").substring(0, index);
 
-        Map<Integer, Integer> t1 = new TreeMap<>();
-        List<String> t2 = new ArrayList<>();
-
 
         NearOptimal main = new NearOptimal();
-        main.insert(t1, t2, filePath + "/test_article.txt");
+        t1 = main.insert(t1, t2, filePath + "/wiki_streaming.txt");
         main.report(t1, t2, "near_optimal_output");
     }
 
 
     public NearOptimal() {
+        t1 = new HashMap<>();
+        t2 = new ArrayList<>();
         hashFunction = new HashFunction(hashRange);
     }
 
+    private long startTime = System.currentTimeMillis();
 
-    public void insert(Map<Integer, Integer> t1, List<String> t2, String fileName) {
+
+    public Map<Integer, Integer> insert(Map<Integer, Integer> t1, List<String> t2, String fileName) {
         File file = new File(fileName);
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(file));
             String tempString;
+            int index = 0;
             while ((tempString = reader.readLine()) != null) {
+
+                if (index % 1000000 == 0) {
+                    long time = System.currentTimeMillis();
+                    System.out.println(index + " " + (time - startTime));
+                }
+                index++;
+
                 Random r = new Random();
                 double d = r.nextDouble();
                 if (d <= p) {
@@ -100,20 +111,39 @@ public class NearOptimal {
                         }
                         i++;
                     }
+                    // Ensure that elements in T2 are ordered according to corresponding values in T1.
+                    i = 0;
+                    for (int tempKey : t1.keySet()) {
+                        if (i < t2.size()) {
+                            int hashedKey = hashFunction.getHashResult(hash.hashCode(t2.get(i)));
+                            if (hashedKey != tempKey) {
+                                for (int j = i; j < t2.size(); j++) {
+                                    String a = t2.get(j);
+                                    if (hashFunction.getHashResult(hash.hashCode(a)) == tempKey) {
+                                        String tempStri = t2.get(i);
+                                        String tempStrj = t2.get(j);
+                                        t2.remove(i);
+                                        t2.add(i, tempStrj);
+                                        t2.remove(j);
+                                        t2.add(j, tempStri);
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            break;
+                        }
+                        i++;
+                    }
 //                    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
                 } else {
                     continue;
                 }
             }
             reader.close();
-        } catch (
-                IOException e)
-
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally
-
-        {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();
@@ -122,7 +152,7 @@ public class NearOptimal {
                 }
             }
         }
-
+        return t1;
     }
 
 
