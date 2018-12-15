@@ -8,18 +8,18 @@ import java.io.FileReader;
 import java.util.*;
 
 public class Optimal {
-    private static final double m = 321320640.0;
-    private static final double epsilon = 0.001; // e
-    private static final double phi = 0.01;   // ϕ
-    private static final double l = Math.pow(10, 5) * Math.pow(epsilon, 2);
+    private static final double m = 1974377; // 321320640.0;
+    private static final double epsilon = 0.01; // e 0.03
+    private static final double phi = 0.01;   // ϕ 0.05
+    private static final double l = Math.pow(10, 5) * Math.pow(epsilon, -2);
     private static final int hashRange = (int) (100 / epsilon);
     private static final int t1Length = (int) (2 * Math.pow(phi, -1));
-    private static final int t2Row = (int) (2 * Math.pow(epsilon, -1));
+    private static final int t2Row = (int) (100 / epsilon);
     private static final int t2Column = (int) (200 * Math.log(12 * Math.pow(phi, -1)));
     private static final int t3D1 = (int) (100 * Math.pow(epsilon, -1));
     private static final int t3D2 = (int) (200 * Math.log(12 * Math.pow(phi, -1)));
-    private static final int t3D3 = (int) (4 * Math.log(Math.pow(epsilon, -1)));
-    private static final int prob = (int) (l / m);
+    private static final int t3D3 = (int) (4.0 * Math.log(Math.pow(epsilon, -1)));
+    private static final double prob =  0.5;
     private int s = 0;
     private static final int hashFunctionNum = (int) (200 * Math.log(12 * Math.pow(phi, -1)));
     private HashMap<Integer, Integer> t1;
@@ -28,9 +28,15 @@ public class Optimal {
     //private double[] f = new double[t2Column];
     private ArrayList<HashFunction> hashFunctions;
 
+    // debg
+    int over = 0;
+    int c = 0;
+
 
     public Optimal() {
-        HashMap<Integer, Integer> t1 = new HashMap<>();  // key , value
+        t1 = new HashMap<>();  // key , value
+        hashFunctions = new ArrayList<>();
+        System.out.println(t3D3);
 
         // initialize hash functions
         for (int i = 0; i < hashFunctionNum; i++) {
@@ -54,36 +60,54 @@ public class Optimal {
         String tempString;
         Hash hash = new Hash();
 
+
+
         while ((tempString = reader.readLine()) != null) {
 
             int x = hash.hashCode(tempString);
             Insert(x);
+            c++;
+            if(c%100000 == 0) System.out.println(c);
         }
-        report();
+//        System.out.println(s);
+        //HashSet s = report();
+//        System.out.println(c);
+        System.out.println(over);
 
     }
 
 
     private void Insert(int x) {
         double d = new Random().nextDouble();
+        double a = prob;
         while (d <= prob) {
             s++;
             // perform Misra-Gries
             misraGries(x);
             for (int j = 0; j < hashFunctionNum; j++) {
                 int i = hashFunctions.get(j).getHashResult(x);
+                a = i;
 
                 // With probability ε, increment T2[i, j]
                 d = new Random().nextDouble();
                 if (d <= epsilon) {
-                    t2[i][j]++;
+                    t2[i][j] = t2[i][j] + 1;
                     int temp = t2[i][j];
                     int t = (int) Math.log(Math.pow(10, -6) * Math.pow(temp, 2));
+                    /*
+                    if(t>=3){
+                        t = 2;
+                        over++;
+                        a=c;
+                        //System.out.println(c);
+                    }*/
                     double p = Math.min(epsilon * Math.pow(2, t), 1);
                     if (t >= 0) {
                         d = new Random().nextDouble();
                         if (d <= p) {
-                            t3[i][j][t]++;
+                            t3[i][j][t] = t3[i][j][t] + 1;
+                            a = t;
+                            over++;
                         }
                     }
 
@@ -104,14 +128,15 @@ public class Optimal {
             int x = entry.getKey();
             if (entry.getValue() >= 0) {
                 double[] fj = new double[t2Column];
-                for (int j = 0; j < hashFunctionNum; j++) {
-                    double fx = findMidian(fj, 0, fj.length - 1);
-                    if (fx >= (phi - (epsilon / 2)) * s) {
+                for (int j = 0; j < hashFunctionNum; j++) fj[j] = calculateFj(x,j);
+                double fx = findMidian(fj, 0, fj.length - 1);
+                if (fx >= (phi - (epsilon / 2)) * (s/10)) {
                         setX.add(x);
-                    }
-
-
+                        System.out.println(x);
                 }
+
+
+
             }
         }
         return setX;
@@ -141,6 +166,7 @@ public class Optimal {
                 }
             }
         }
+        int i = 0;
 
     }
 
@@ -149,7 +175,9 @@ public class Optimal {
         for (int t = 0; t < (int) (4 * Math.log(Math.pow(epsilon, -1))); t++) {
 
             int i = hashFunctions.get(j).getHashResult(x);
-            res += (double) t3[i][j][t] / Math.min(epsilon * Math.pow(2, t), 1);
+            double a = t3[i][j][t];
+            double b = Math.min(epsilon * Math.pow(2, t), 1);
+            res += a/b;
         }
         return res;
     }
@@ -181,6 +209,12 @@ public class Optimal {
 
 
     }
+    public static void main(String[] args) throws Exception {
+        Optimal opt = new Optimal();
+        opt.train("xaa");
+    }
+
+
 
 
 }
