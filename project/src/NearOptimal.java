@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class NearOptimal {
 //        private static final int m = 321320640;
-    private static final int m = 1000;
+    private static final int m = 10000000;
 
     private static final double epsilon = 0.001;
     private static final double delta = 0.1;
@@ -30,8 +30,8 @@ public class NearOptimal {
 
 
         NearOptimal main = new NearOptimal();
-        t1 = main.insert(t1, t2, filePath + "/wiki_streaming.txt");
-        main.report(t1, t2, "near_optimal_output");
+        t1 = main.insert(t1, t2, filePath + "/small_wiki_streaming.txt");
+        main.report(t1, t2, "test_near_optimal_output");
     }
 
 
