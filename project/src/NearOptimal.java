@@ -30,8 +30,8 @@ public class NearOptimal {
 
 
         NearOptimal main = new NearOptimal();
-        t1 = main.insert(t1, t2, filePath + "/test_input.txt");
-        main.report(t1, t2, "test_near_optimal_output");
+        t1 = main.insert(t1, t2, filePath + "/wiki_streaming.txt");
+        main.report(t1, t2, "near_optimal_output");
     }
 
 
