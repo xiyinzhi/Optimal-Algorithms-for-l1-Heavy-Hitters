@@ -5,7 +5,7 @@ import java.util.*;
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-    //    private static final int m = 321320640;
+//        private static final int m = 321320640;
     private static final int m = 1000;
 
     private static final double epsilon = 0.001;
@@ -30,8 +30,8 @@ public class NearOptimal {
 
 
         NearOptimal main = new NearOptimal();
-        t1 = main.insert(t1, t2, filePath + "/wiki_streaming.txt");
-        main.report(t1, t2, "near_optimal_output");
+        t1 = main.insert(t1, t2, filePath + "/test_input.txt");
+        main.report(t1, t2, "test_near_optimal_output");
     }
 
 
@@ -98,9 +98,9 @@ public class NearOptimal {
                                 if (entry.getValue() <= t1.get(key)) {
                                     if (!t2.contains(x)) {
                                         boolean flag = false;
+                                        // in case x is not in t2 but h(x) is in the 1/φ of t1
                                         for (String str : t2) {
-                                            if (hashFunction.getHashResult(hash.hashCode(str)) ==
-                                                    hashFunction.getHashResult(hash.hashCode(x))) {
+                                            if (hashFunction.getHashResult(hash.hashCode(str)) == key) {
                                                 flag = true;
                                                 break;
                                             }
