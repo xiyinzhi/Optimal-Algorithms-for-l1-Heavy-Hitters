@@ -5,8 +5,8 @@ import java.util.*;
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-//        private static final int m = 321320640;
-    private static final int m = 10000000;
+    private static final int m = 321320640;
+//    private static final int m = 100000000;
 
     private static final double epsilon = 0.001;
     private static final double delta = 0.1;
@@ -56,12 +56,15 @@ public class NearOptimal {
                 if (index % 1000000 == 0) {
                     long time = System.currentTimeMillis();
                     System.out.println(index + " " + (time - startTime));
+//                    report(t1, t2, "test/test_near_optimal_output_" + time);
                 }
                 index++;
-
+                if (index == 905) {
+                    System.out.println();
+                }
                 Random r = new Random();
                 double d = r.nextDouble();
-                if (d <= p) {
+                if (d <= 1) {
                     // perform Misra-Gries
                     String x = tempString.toLowerCase();
                     Hash hash = new Hash();
@@ -91,66 +94,79 @@ public class NearOptimal {
 
                     // maintain T2
                     int i = 1;
+                    int thresValue = 0;
+                    boolean updateT2 = true;
                     if (t1.containsKey(key)) {
-                        for (Map.Entry<Integer, Integer> entry : t1.entrySet()) {
-                            if (i <= threshold) {
+                        if (t1.size() >= threshold) {
+                            for (Map.Entry<Integer, Integer> entry : t1.entrySet()) {
+                                if (i == threshold) {
 //                            System.out.println(entry);
-                                if (entry.getValue() <= t1.get(key)) {
-                                    if (!t2.contains(x)) {
-                                        boolean flag = false;
-                                        // in case x is not in t2 but h(x) is in the 1/φ of t1
-                                        for (String str : t2) {
-                                            if (hashFunction.getHashResult(hash.hashCode(str)) == key) {
-                                                flag = true;
+                                    thresValue = entry.getValue();
+                                    if (t1.get(key) < thresValue) {
+                                        updateT2 = false;
+                                    }
+                                } else if (i > threshold) {
+                                    break;
+                                }
+                                i++;
+                            }
+                        }
+                        if (updateT2) {
+                            if (!t2.contains(x)) {
+                                boolean flag = false;
+                                // in case x is not in t2 but h(x) is in the 1/φ of t1
+                                for (String str : t2) {
+                                    if (hashFunction.getHashResult(hash.hashCode(str)) == key) {
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (flag != true) {
+                                    if (t2.size() == threshold) {
+                                        Iterator<String> iterator = t2.iterator();
+                                        while (iterator.hasNext()) {
+                                            String y = iterator.next();
+                                            int keyy = hashFunction.getHashResult(hash.hashCode(y));
+                                            if (!t1.containsKey(keyy) || t1.get(keyy) < thresValue) {
+                                                iterator.remove();
+                                            }
+                                        }
+                                        if (t2.size() < threshold) {
+                                            t2.add(x);
+                                        }
+                                    } else {
+                                        t2.add(x);
+                                    }
+                                }
+                            }
+                            // Ensure that elements in T2 are ordered according to corresponding values in T1.
+                            int c = 0;
+                            for (int tempKey : t1.keySet()) {
+                                if (c < t2.size()) {
+                                    int hashedKey = hashFunction.getHashResult(hash.hashCode(t2.get(c)));
+                                    if (hashedKey != tempKey) {
+                                        for (int j = c; j < t2.size(); j++) {
+                                            String a = t2.get(j);
+                                            if (hashFunction.getHashResult(hash.hashCode(a)) == tempKey) {
+                                                String tempStri = t2.get(c);
+                                                String tempStrj = t2.get(j);
+                                                t2.remove(c);
+                                                t2.add(c, tempStrj);
+                                                t2.remove(j);
+                                                t2.add(j, tempStri);
                                                 break;
                                             }
                                         }
-                                        if (flag == true) {
-                                            break;
-                                        }
-                                        if (t2.size() == threshold) {
-                                            String y = t2.get(t2.size() - 1);
-                                            if (t1.get(hashFunction.getHashResult(hash.hashCode(y))) < t1.get(key)) {
-                                                t2.remove(y);
-                                                t2.add(x);
-                                            }
-                                        } else {
-                                            t2.add(x);
-                                        }
                                     }
-                                    // Ensure that elements in T2 are ordered according to corresponding values in T1.
-                                    i = 0;
-                                    for (int tempKey : t1.keySet()) {
-                                        if (i < t2.size()) {
-                                            int hashedKey = hashFunction.getHashResult(hash.hashCode(t2.get(i)));
-                                            if (hashedKey != tempKey) {
-                                                for (int j = i; j < t2.size(); j++) {
-                                                    String a = t2.get(j);
-                                                    if (hashFunction.getHashResult(hash.hashCode(a)) == tempKey) {
-                                                        String tempStri = t2.get(i);
-                                                        String tempStrj = t2.get(j);
-                                                        t2.remove(i);
-                                                        t2.add(i, tempStrj);
-                                                        t2.remove(j);
-                                                        t2.add(j, tempStri);
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            break;
-                                        }
-                                        i++;
-                                    }
+                                } else {
                                     break;
                                 }
-                            } else {
-                                break;
+                                c++;
                             }
-                            i++;
                         }
-
                     }
+
+
 //                    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
                 } else {
                     continue;

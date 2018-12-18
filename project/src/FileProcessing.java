@@ -6,10 +6,10 @@ import java.util.*;
  */
 public class FileProcessing {
 
-    public Map<String, Integer> readCountFile(String fileName, int k) {
+    public LinkedHashMap<String, Integer> readCountFile(String fileName, int k) {
         File file = new File(fileName);
         BufferedReader reader = null;
-        Map<String, Integer> map = new HashMap<>();
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
         try {
             reader = new BufferedReader(new FileReader(file));
             String tempString;

@@ -32,7 +32,7 @@ def cleanFile():
 def generateSmallFile():
     read = open('../wiki_streaming.txt', 'r')
     write = open("../small_wiki_streaming.txt", 'w')
-    for i in range(0, 10000000):
+    for i in range(0, 1000000):
         s = read.readline()
         write.writelines(s)
         i += 1
