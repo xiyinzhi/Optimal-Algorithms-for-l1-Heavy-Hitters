@@ -1,11 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Created by xyz on 2018/12/10.
@@ -53,9 +46,9 @@ public class Main {
     public void evaluateNO(LinkedHashMap<String, Integer> trueSmallWords, LinkedHashMap<String, Integer> testSmallWords) {
         int count = 0;
         int t = 0;
-        double epsilon = 0.001;
-        int m = 1000000;
-        double phi = 0.01;
+        int m = 10000000;
+        double epsilon = 0.01;
+        double phi = 0.02;
         for (String key : trueSmallWords.keySet()) {
             int trueValue = trueSmallWords.get(key);
             if (trueValue >= phi * m) {

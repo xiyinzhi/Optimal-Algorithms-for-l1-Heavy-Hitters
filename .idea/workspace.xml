@@ -3,17 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="e5b50642-47ac-4864-a1d4-85349c10b189" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1603.00213.pdf" afterPath="$PROJECT_DIR$/1603.00213.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/out/production/project/FileProcessing.class" afterPath="$PROJECT_DIR$/project/out/production/project/FileProcessing.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/out/production/project/Main.class" afterPath="$PROJECT_DIR$/project/out/production/project/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/out/production/project/NearOptimal$1.class" afterPath="$PROJECT_DIR$/project/out/production/project/NearOptimal$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/out/production/project/NearOptimal.class" afterPath="$PROJECT_DIR$/project/out/production/project/NearOptimal.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pre-processing.py" afterPath="$PROJECT_DIR$/pre-processing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/.idea/workspace.xml" afterPath="$PROJECT_DIR$/project/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/FileProcessing.java" afterPath="$PROJECT_DIR$/project/src/FileProcessing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/Main.java" afterPath="$PROJECT_DIR$/project/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/NearOptimal.java" afterPath="$PROJECT_DIR$/project/src/NearOptimal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_input_sorted_word_count.txt" afterPath="$PROJECT_DIR$/test_input_sorted_word_count.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_near_optimal_output.txt" afterPath="$PROJECT_DIR$/test_near_optimal_output.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,8 +29,8 @@
       <file leaf-file-name="pre-processing.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pre-processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            <state relative-caret-position="269">
+              <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="40" />
               <folding>
                 <element signature="e#15#26#0" expanded="true" />
               </folding>
@@ -90,7 +87,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -103,6 +99,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
@@ -269,8 +266,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25767368" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -311,6 +309,16 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pre-processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="55" column="21" lean-forward="true" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="21" />
+          <folding>
+            <element signature="e#15#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pre-processing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -403,8 +411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pre-processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+        <state relative-caret-position="269">
+          <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="40" />
           <folding>
             <element signature="e#15#26#0" expanded="true" />
           </folding>

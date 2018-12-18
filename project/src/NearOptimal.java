@@ -5,12 +5,12 @@ import java.util.*;
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-    private static final int m = 321320640;
-//    private static final int m = 100000000;
+//    private static final int m = 321320640;
+    private static final int m = 10000000;
 
-    private static final double epsilon = 0.001;
-    private static final double delta = 0.1;
-    private static final double phi = 0.01;
+    private static final double epsilon = 0.01;
+    private static final double delta = 0.0000001;
+    private static final double phi = 0.02;
     private static final int l = Math.min((int) (6 * Math.log(6 / delta) / Math.pow(epsilon, 2)), m);
     private static final int hashRange = l > 46340 ? Integer.MAX_VALUE : roundUp(4 * Math.pow(l, 2) / delta);
     private static final double p = (double) (6 * l) / (double) m;
@@ -51,17 +51,15 @@ public class NearOptimal {
             reader = new BufferedReader(new FileReader(file));
             String tempString;
             int index = 0;
+            System.out.println(p);
             while ((tempString = reader.readLine()) != null) {
-
                 if (index % 1000000 == 0) {
                     long time = System.currentTimeMillis();
                     System.out.println(index + " " + (time - startTime));
 //                    report(t1, t2, "test/test_near_optimal_output_" + time);
                 }
                 index++;
-                if (index == 905) {
-                    System.out.println();
-                }
+
                 Random r = new Random();
                 double d = r.nextDouble();
                 if (d <= 1) {
@@ -166,8 +164,6 @@ public class NearOptimal {
                         }
                     }
 
-
-//                    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
                 } else {
                     continue;
                 }
