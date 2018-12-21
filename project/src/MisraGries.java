@@ -7,6 +7,8 @@ import java.util.*;
 public class MisraGries {
 
     public static void main(String[] args) throws IOException {
+        long startTime = System.currentTimeMillis();
+
         int index = System.getProperty("user.dir").lastIndexOf("/");
         String path = System.getProperty("user.dir").substring(0, index);
 
@@ -14,15 +16,15 @@ public class MisraGries {
         String filePath = System.getProperty("user.dir").substring(0, index);
 
         FileProcessing fileProcessing = new FileProcessing();
-//        List<String> words = fileProcessing.readFile(filePath + "/wiki_streaming.txt");
 
         MisraGries run = new MisraGries();
-        Scanner input = new Scanner(System.in);
-        int k = input.nextInt();
-        Map<String, Integer> map = run.misraGries(k, filePath + "/wiki_streaming.txt");
 
+        int k = 1000;
+        Map<String, Integer> map = run.misraGries(k, filePath + "/wiki_streaming.txt");
         fileProcessing.saveMGResult(map, "wiki_MG_output");
-//        System.out.println("Hello World!");
+
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime);
     }
 
     public Map<String, Integer> misraGries(int k, String fileName) {
@@ -33,9 +35,7 @@ public class MisraGries {
             reader = new BufferedReader(new FileReader(file));
             String tempString;
             while ((tempString = reader.readLine()) != null) {
-//                list.add(tempString.toLowerCase());
                 String key = tempString.toLowerCase();
-//                System.out.println(key.hashCode());
                 if (map.containsKey(key)) {
                     int v = map.get(key);
                     map.put(key, v + 1);
@@ -44,7 +44,6 @@ public class MisraGries {
                 } else {
                     for (Iterator<Map.Entry<String, Integer>> it = map.entrySet().iterator(); it.hasNext(); ) {
                         Map.Entry<String, Integer> item = it.next();
-//                    System.out.println("item: " + item.getKey() + ", " + item.getValue());
                         int v = item.getValue();
                         v--;
                         if (v == 0) {

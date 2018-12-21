@@ -45,27 +45,36 @@ public class Main {
 
     public void evaluateNO(LinkedHashMap<String, Integer> trueSmallWords, LinkedHashMap<String, Integer> testSmallWords) {
         int count = 0;
-        int t = 0;
+        int countA = 0;
+        int countB = 0;
         int m = 10000000;
         double epsilon = 0.01;
         double phi = 0.02;
+        int sum = testSmallWords.size();
+        int index = 0;
         for (String key : trueSmallWords.keySet()) {
             int trueValue = trueSmallWords.get(key);
             if (trueValue >= phi * m) {
-                t++;
                 if (testSmallWords.containsKey(key)) {
                     int testValue = testSmallWords.get(key);
-                    if (testValue - trueValue <= epsilon * m && testValue - trueValue >= -epsilon * m) {
-                        count++;
+                    if (!(testValue - trueValue <= epsilon * m && testValue - trueValue >= -epsilon * m)) {
+                        countA++;
                     }
                 }
+                index++;
             } else if (trueValue <= (phi - epsilon) * m) {
                 if (testSmallWords.containsKey(key)) {
-                    System.out.println("Wrong!");
+                    countB++;
                 }
+            } else {
+                index++;
             }
         }
-        System.out.println("Result:" + (double) count / (double) t);
+        if (1 / phi > index) {
+            countB = 0;
+        }
+        count = countA + countB;
+        System.out.println("Error Rate(for single time):" + (double) count / (double) sum);
         return;
     }
 }

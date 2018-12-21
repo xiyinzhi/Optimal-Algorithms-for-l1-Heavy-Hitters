@@ -16,6 +16,7 @@ public class HashFunction {
     public HashFunction(int hashRange) {
         this.a = new Random().nextInt(99991);
         this.b = new Random().nextInt(99991);
+
         this.hashRange = hashRange;
     }
 

@@ -5,11 +5,11 @@ import java.util.*;
  * Created by xyz on 2018/12/10.
  */
 public class NearOptimal {
-//    private static final int m = 321320640;
-    private static final int m = 10000000;
+    private static final int m = 321320640;
+//    private static final int m = 10000000;
 
-    private static final double epsilon = 0.01;
-    private static final double delta = 0.0000001;
+    private static final double epsilon = 0.0008;
+    private static final double delta = 0.02;
     private static final double phi = 0.02;
     private static final int l = Math.min((int) (6 * Math.log(6 / delta) / Math.pow(epsilon, 2)), m);
     private static final int hashRange = l > 46340 ? Integer.MAX_VALUE : roundUp(4 * Math.pow(l, 2) / delta);
@@ -20,6 +20,8 @@ public class NearOptimal {
     private HashFunction hashFunction;
     private static Map<Integer, Integer> t1;
     private static List<String> t2;
+
+    private static long startTime = System.currentTimeMillis();
 
     public static void main(String[] args) throws IOException {
         int index = System.getProperty("user.dir").lastIndexOf("/");
@@ -32,17 +34,16 @@ public class NearOptimal {
         NearOptimal main = new NearOptimal();
         t1 = main.insert(t1, t2, filePath + "/small_wiki_streaming.txt");
         main.report(t1, t2, "test_near_optimal_output");
-    }
 
+        long endTime = System.currentTimeMillis();
+        System.out.println(m + " " + (endTime - startTime));
+    }
 
     public NearOptimal() {
         t1 = new HashMap<>();
         t2 = new ArrayList<>();
         hashFunction = new HashFunction(hashRange);
     }
-
-    private long startTime = System.currentTimeMillis();
-
 
     public Map<Integer, Integer> insert(Map<Integer, Integer> t1, List<String> t2, String fileName) {
         File file = new File(fileName);
@@ -56,18 +57,16 @@ public class NearOptimal {
                 if (index % 1000000 == 0) {
                     long time = System.currentTimeMillis();
                     System.out.println(index + " " + (time - startTime));
-//                    report(t1, t2, "test/test_near_optimal_output_" + time);
                 }
                 index++;
 
                 Random r = new Random();
                 double d = r.nextDouble();
-                if (d <= 1) {
+                if (d <= p) {
                     // perform Misra-Gries
                     String x = tempString.toLowerCase();
                     Hash hash = new Hash();
                     int key = hashFunction.getHashResult(hash.hashCode(x));
-//                    System.out.println(x + ":" + key);
                     if (t1.containsKey(key)) {
                         int v = t1.get(key);
                         t1.put(key, v + 1);
@@ -76,7 +75,6 @@ public class NearOptimal {
                     } else {
                         for (Iterator<Map.Entry<Integer, Integer>> it = t1.entrySet().iterator(); it.hasNext(); ) {
                             Map.Entry<Integer, Integer> item = it.next();
-//                    System.out.println("item: " + item.getKey() + ", " + item.getValue());
                             int v = item.getValue();
                             v--;
                             if (v == 0) {
@@ -88,7 +86,7 @@ public class NearOptimal {
                     }
 
                     // sort T1 by value, desc
-                    t1 = sortByValueDescending(t1);
+                    t1 = sortByValueDesc(t1);
 
                     // maintain T2
                     int i = 1;
@@ -98,7 +96,6 @@ public class NearOptimal {
                         if (t1.size() >= threshold) {
                             for (Map.Entry<Integer, Integer> entry : t1.entrySet()) {
                                 if (i == threshold) {
-//                            System.out.println(entry);
                                     thresValue = entry.getValue();
                                     if (t1.get(key) < thresValue) {
                                         updateT2 = false;
@@ -202,7 +199,7 @@ public class NearOptimal {
 
     }
 
-    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDescending(Map<K, V> map) {
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDesc(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
             @Override
