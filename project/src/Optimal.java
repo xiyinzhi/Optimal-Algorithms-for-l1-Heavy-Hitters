@@ -9,7 +9,7 @@ public class Optimal {
     private static final double m = 9000000; // 321320640.0;
     private static final double epsilon = 0.01; // e 0.03
     private static final double phi = 0.01;   // ϕ 0.05
-    private static final double l = 5*Math.pow(10, 2) * Math.pow(epsilon, -2);
+    private static final double l = 5 * Math.pow(10, 2) * Math.pow(epsilon, -2);
     private static final int hashRange = (int) (100 / epsilon);
     private static final int t1Length = (int) (2 * Math.pow(phi, -1));
     private static final int t2Row = (int) (100 / epsilon);
@@ -17,7 +17,7 @@ public class Optimal {
     private static final int t3D1 = (int) (100 * Math.pow(epsilon, -1));
     private static final int t3D2 = (int) (200 * Math.log(12 * Math.pow(phi, -1)));
     private static final int t3D3 = (int) (4.0 * Math.log(Math.pow(epsilon, -1)));
-    private static final double prob =  1;
+    private static final double prob = 1;
     private int s = 0;
     private static final int hashFunctionNum = (int) (200 * Math.log(12 * Math.pow(phi, -1)));
     private HashMap<String, Integer> t1;
@@ -59,13 +59,12 @@ public class Optimal {
         Hash hash = new Hash();
 
 
-
         while ((tempString = reader.readLine()) != null) {
 
             int x = hash.hashCode(tempString);
-            Insert(x,tempString);
+            Insert(x, tempString);
             c++;
-            if(c%100000 == 0) System.out.println(c);
+            if (c % 100000 == 0) System.out.println(c);
         }
 //        System.out.println(s);
         report();
@@ -75,7 +74,7 @@ public class Optimal {
     }
 
 
-    private void Insert(int x,String word) {
+    private void Insert(int x, String word) {
         double d = new Random().nextDouble();
         //double a = prob;
         s++; // since small dataset
@@ -87,10 +86,10 @@ public class Optimal {
             // a = i;
             // With probability ε, increment T2[i, j]
             d = new Random().nextDouble();
-            if (d <= epsilon*10)  t2[i][j] = t2[i][j] + 1;
-                //t2[i][j] = t2[i][j] + 1;
+            if (d <= epsilon * 10) t2[i][j] = t2[i][j] + 1;
+            //t2[i][j] = t2[i][j] + 1;
             int temp = t2[i][j];
-            if(temp == 0) t = 1;
+            if (temp == 0) t = 1;
             else t = (int) Math.log(Math.pow(10, -6) * Math.pow(temp, 2));
             double p = Math.min(epsilon * Math.pow(2, t), 1);
             if (t >= 0) {
@@ -98,28 +97,24 @@ public class Optimal {
                 if (d <= p) {
                     t3[i][j][t] = t3[i][j][t] + 1;
 
-                        }
-                    }
-
-
                 }
+            }
 
 
-
-
+        }
 
 
     }
 
-    private void report() throws Exception{
+    private void report() throws Exception {
         String fileName = "xaa_out9";//out_full_1
-        File file = new File( fileName + ".txt");
+        File file = new File(fileName + ".txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(file));
-        Comparator<Double> comparator = new Comparator<Double>(){
+        Comparator<Double> comparator = new Comparator<Double>() {
 
             @Override
             public int compare(Double d1, Double d2) {
-                return (int) (d1-d2);
+                return (int) (d1 - d2);
             }
         };
         //HashSet<String> setX = new HashSet<>();
@@ -131,36 +126,35 @@ public class Optimal {
             if (entry.getValue() >= 0) {
                 int fjLength = t2Column;
 
-                Queue<Double> fj  = new PriorityQueue<>(fjLength,comparator);
+                Queue<Double> fj = new PriorityQueue<>(fjLength, comparator);
 
                 //double[] fj = new double[t2Column];
-                for (int j = 0; j < hashFunctionNum; j++){
-                    double temp = calculateFj(x,j);
+                for (int j = 0; j < hashFunctionNum; j++) {
+                    double temp = calculateFj(x, j);
                     // fj contain top 5%?
-                    if(fj.size()>fjLength){
-                        if(temp>fj.peek()){
+                    if (fj.size() > fjLength) {
+                        if (temp > fj.peek()) {
                             fj.poll();
                             fj.add(temp);
                         }
-                    }else fj.add(temp);
+                    } else fj.add(temp);
 
                 }
 
                 double fx = 0;
-                if(fjLength%2==0) {
-                    fx = (fj.toArray(new Double[fjLength])[fjLength/2]+fj.toArray(new Double[fjLength])[(fjLength/2)-1])/2;
-                }else{
-                    fx = fj.toArray(new Double[fjLength])[(fjLength/2)-1];
+                if (fjLength % 2 == 0) {
+                    fx = (fj.toArray(new Double[fjLength])[fjLength / 2] + fj.toArray(new Double[fjLength])[(fjLength / 2) - 1]) / 2;
+                } else {
+                    fx = fj.toArray(new Double[fjLength])[(fjLength / 2) - 1];
                 }
                 //double fx = findMidian(fj, 0, fj.length - 1);
                 if (fx >= (phi - (epsilon / 2)) * s) { //(phi - (epsilon / 2)) * (s)
-                    out.write(entry.getKey() + " "+ fx+"\n");
+                    out.write(entry.getKey() + " " + fx + "\n");
                     //setX.add(entry.getKey());
 
 
-                        //System.out.println(x);
+                    //System.out.println(x);
                 }
-
 
 
             }
@@ -204,9 +198,9 @@ public class Optimal {
             int i = hashFunctions.get(j).getHashResult(x);
             double a = t3[i][j][t];
             double b = Math.min(epsilon * Math.pow(2, t), 1);
-            res += a/b;
+            res += a / b;
         }
-        if(res!=0) over++;
+        if (res != 0) over++;
         return res;
     }
 
@@ -237,12 +231,11 @@ public class Optimal {
 
 
     }
+
     public static void main(String[] args) throws Exception {
         Optimal opt = new Optimal();
         opt.train("xaa_1");//wiki_streaming.txt
     }
-
-
 
 
 }

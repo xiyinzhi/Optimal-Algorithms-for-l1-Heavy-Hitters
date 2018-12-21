@@ -30,7 +30,6 @@ public class NearOptimal {
         index = path.lastIndexOf("/");
         String filePath = System.getProperty("user.dir").substring(0, index);
 
-
         NearOptimal main = new NearOptimal();
         t1 = main.insert(t1, t2, filePath + "/small_wiki_streaming.txt");
         main.report(t1, t2, "test_near_optimal_output");
