@@ -42,7 +42,7 @@ def generateSmallFile():
 
 def wordCount():
     read = open('../small_wiki_streaming.txt', 'r')
-    write = open("test_input_sorted_word_count.txt", 'w')
+    write = open("small_wiki_sorted_word_count.txt", 'w')
 
     s = read.readlines()
     # s.replace("\n","")
