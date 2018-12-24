@@ -11,7 +11,7 @@ Small Wikipedia files
 
 We will evaluate the space, error, time for the 3 algorithms compared to true values.
 
-Wuth large enough dataset, The algorithm 2 is best in saving space because its space cost is mainly constant. But in order to maintain reasonable parameters, the algorithm 1 and Misra-Gries both need to use larger size of tables.
+With large enough dataset, The algorithm 2 is best in saving space because its space cost is mainly constant. In order to maintain reasonable parameters, the algorithm 1 and Misra-Gries both need to use larger size of tables.
 
 ### True results
 Python program [prepocessing.py](https://github.com/xiyinzhi/Optimal-Algorithms-for-l1-Heavy-Hitters/blob/master/pre-processing.py) for data clean and word-count.
