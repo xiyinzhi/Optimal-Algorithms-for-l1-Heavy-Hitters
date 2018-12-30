@@ -11,7 +11,7 @@ Small Wikipedia files
 
 We will evaluate the space, error, time for the 3 algorithms compared to true values.
 
-With large enough dataset, algorithm 1 and 2 will be more space-efficient, but slower than the Misra-Gries algorithm. In order to maintain reasonable parameters, the algorithm 1 and Misra-Gries both need to use larger size of tables.
+With large enough dataset, algorithm 1 and 2 will be more space-efficient, but slower than the Misra-Gries algorithm.
 
 ### True results
 Python program [prepocessing.py](https://github.com/xiyinzhi/Optimal-Algorithms-for-l1-Heavy-Hitters/blob/master/pre-processing.py) for data clean and word-count.
