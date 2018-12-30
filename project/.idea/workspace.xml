@@ -48,8 +48,8 @@
       <file leaf-file-name="Optimal.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Optimal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="19" />
+            <state relative-caret-position="178">
+              <caret line="92" column="33" lean-forward="true" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -86,6 +86,9 @@
       <find>startTime</find>
       <find>sortByValueDesc</find>
       <find>test_input_sorted_word_count</find>
+      <find>t1</find>
+      <find>queue</find>
+      <find>log</find>
     </findStrings>
     <replaceStrings>
       <replace>Integer, Integer</replace>
@@ -698,12 +701,12 @@
       <workItem from="1545344691087" duration="6936000" />
       <workItem from="1545390432021" duration="2601000" />
       <workItem from="1546148724665" duration="172000" />
-      <workItem from="1546149667726" duration="231000" />
+      <workItem from="1546149667726" duration="503000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86411000" />
+    <option name="totallyTimeSpent" value="86683000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -766,22 +769,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MisraGries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/NearOptimal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1174,10 +1161,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/StrictMath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="230" column="34" lean-forward="false" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/src.zip!/java/lang/Math.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="292" column="26" lean-forward="false" selection-start-line="292" selection-start-column="26" selection-end-line="292" selection-end-column="26" />
+          <folding>
+            <element signature="e#11119#11120#0" expanded="true" />
+            <element signature="e#11200#11201#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Optimal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="19" />
+        <state relative-caret-position="178">
+          <caret line="92" column="33" lean-forward="true" selection-start-line="92" selection-start-column="33" selection-end-line="92" selection-end-column="33" />
           <folding />
         </state>
       </provider>
